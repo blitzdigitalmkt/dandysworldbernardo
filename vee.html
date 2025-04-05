@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vee - Dandy's World</title>
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #1f1f1f;
+            --accent: #e74c3c;
+            --text: #f8f8f8;
+            --youtube: #ff0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 4px solid #27ae60;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            background-color: #27ae60;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            border: 3px solid var(--primary);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--text);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* YouTube Section */
+        .youtube-section {
+            background: linear-gradient(135deg, rgba(32, 32, 32, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-top: 5px solid var(--youtube);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/200') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .youtube-title {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .youtube-description {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .youtube-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .youtube-video {
+            flex: 1;
+            min-width: 300px;
+            max-width: 560px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio */
+        }
+
+        .youtube-video img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .youtube-video:hover img {
+            transform: scale(1.05);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background-color: var(--youtube);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .play-button::after {
+            content: '';
+            display: block;
+            border-style: solid;
+            border-width: 15px 0 15px 25px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .youtube-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .channel-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .channel-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--youtube);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+        .stat-icon {
+            font-size: 1.2rem;
+            color: var(--youtube);
+        }
+
+        .youtube-button {
+            display: inline-block;
+            background-color: var(--youtube);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .youtube-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background-color: #e50000;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Modo escuro/claro toggle */
+        .theme-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            font-size: 1.5rem;
+        }
+
+        /* Animações */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .youtube-title {
+                font-size: 2rem;
+            }
+
+            .youtube-description {
+                font-size: 1rem;
+            }
+
+            .youtube-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .youtube-video {
+                max-width: 100%;
+            }
+
+            .youtube-info {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .channel-name {
+                justify-content: center;
+            }
+
+            .stat {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .youtube-title {
+                font-size: 1.8rem;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .youtube-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>VEE</h1>
+        <p>A personagem misteriosa de Dandy's World</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/index.html">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#historia">História</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#dicas">Dicas</a></li>
+            <li><a href="#youtube">Meu Canal</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Vee, a Enigmática</h2>
+                <p>Vee é uma das personagens mais misteriosas e intrigantes de Dandy's World no Roblox. Com sua
+                    aparência única e habilidades especiais, ela se tornou uma figura icônica entre os jogadores.</p>
+                <p class="info-box">Vee pode ser encontrada em locais específicos do mapa, sempre cercada por um
+                    mistério verde brilhante que a distingue dos outros personagens.</p>
+                <a href="#historia" class="button">Descobrir mais</a>
+            </div>
+            <div class="hero-image">
+                <img src="./images/vee001.png" alt="Vee de Dandy's World" class="float">
+            </div>
+        </section>
+
+        <section id="sobre" class="section">
+            <h2>Sobre Vee</h2>
+            <p>Vee é uma personagem única em Dandy's World, reconhecida por sua aura verde e comportamento imprevisível.
+                Ela tem uma ligação especial com as áreas mais obscuras do jogo e frequentemente é vista perto de
+                elementos importantes da narrativa.</p>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Velocidade</h3>
+                    <div class="stat-value">85</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Furtividade</h3>
+                    <div class="stat-value">92</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Poder</h3>
+                    <div class="stat-value">78</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="historia" class="section">
+            <h2>História de Vee</h2>
+            <p>A história de Vee está envolta em mistério. Acredita-se que ela era originalmente uma pesquisadora que se
+                aventurou muito profundamente nos segredos de Dandy's World e, como resultado, foi transformada pela
+                energia verde que agora a envolve.</p>
+            <p>Segundo as lendas do jogo, Vee possui conhecimentos sobre segredos ocultos e rotas alternativas que
+                nenhum outro personagem conhece. Ela raramente interage diretamente com os jogadores, mas quando o faz,
+                frequentemente oferece pistas enigmáticas.</p>
+            <p class="info-box">As aparições de Vee costumam prenunciar eventos importantes no jogo, e muitos jogadores
+                acreditam que ela é a chave para desbloquear o verdadeiro final de Dandy's World.</p>
+        </section>
+
+        <section id="habilidades" class="section">
+            <h2>Habilidades de Vee</h2>
+            <p>Vee possui um conjunto único de habilidades que a tornam uma personagem formidável e misteriosa:</p>
+            <ul style="margin-left: 2rem;">
+                <li><strong>Teleporte:</strong> Vee pode se teleportar para diferentes locais do mapa em um piscar de
+                    olhos.</li>
+                <li><strong>Camuflagem:</strong> Ela pode se fundir com as sombras, tornando-se quase invisível.</li>
+                <li><strong>Visão noturna:</strong> Enxerga perfeitamente na escuridão total.</li>
+                <li><strong>Manipulação de energia:</strong> Pode criar barreiras e projeções usando sua energia verde
+                    característica.</li>
+                <li><strong>Conhecimento antigo:</strong> Tem acesso a informações e segredos ocultos do mundo do jogo.
+                </li>
+            </ul>
+        </section>
+
+        <section id="galeria" class="section">
+            <h2>Galeria</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="./images/vee001.png" alt="Vee em seu habitat">
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/vee001.png" alt="Vee usando seus poderes">
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/vee001.png" alt="Encontro raro com Vee">
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/vee001.png" alt="Vee na área secreta">
+                </div>
+            </div>
+        </section>
+
+        <section id="dicas" class="section">
+            <h2>Dicas para Encontrar Vee</h2>
+            <p>Encontrar Vee em Dandy's World pode ser um desafio, mas estas dicas podem ajudar:</p>
+            <ol style="margin-left: 2rem;">
+                <li>Explore áreas escuras e pouco visitadas do mapa.</li>
+                <li>Preste atenção em luzes ou brilhos verdes incomuns.</li>
+                <li>Visite locais específicos durante a "hora verde" do jogo (geralmente à meia-noite no horário do
+                    jogo).</li>
+                <li>Colete todos os itens de cristal verde espalhados pelo mapa para aumentar suas chances de
+                    encontrá-la.</li>
+                <li>Ouça com atenção - às vezes Vee emite sons sutis que podem guiá-lo até ela.</li>
+            </ol>
+            <p class="info-box">Nem todos os jogadores conseguem ver Vee na mesma partida. Se você não conseguir
+                encontrá-la, tente novamente em outro servidor ou em um horário diferente.</p>
+        </section>
+
+        <!-- Nova seção do YouTube -->
+        <section id="youtube" class="youtube-section">
+            <h2 class="youtube-title">Confira Meu Canal no YouTube</h2>
+            <p class="youtube-description">Dicas exclusivas, gameplays e segredos de Dandy's World. Acompanhe meus
+                vídeos para descobrir mais sobre Vee e outros personagens!</p>
+
+            <div class="youtube-content">
+                <div class="youtube-video">
+                    <img src="./images/capavideo.avif" alt="Destaque do Canal">
+                    <div class="play-button"></div>
+                </div>
+
+                <div class="youtube-info">
+                    <div class="channel-name">
+                        <img src="./images/logocanal.jpg" alt="Logo do Canal" class="channel-logo">
+                        <span>BernardoDandysworld</span>
+                    </div>
+
+                    <div class="stat">
+                        <span class="stat-icon">👁️</span>
+                        <span>Vídeos sobre Dandy's World</span>
+                    </div>
+
+                    <div class="stat">
+                        <span class="stat-icon">🎮</span>
+                        <span>Gameplays exclusivas</span>
+                    </div>
+
+                    <div class="stat">
+                        <span class="stat-icon">🔎</span>
+                        <span>Segredos e easter eggs</span>
+                    </div>
+
+                    <a href="https://www.youtube.com/@BernardoDandysworld" target="_blank"
+                        class="youtube-button pulse">Inscreva-se Agora</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Portal Dandy's World criado por Bernardo - 2025</p>
+        <p>Vee e todos os elementos de Dandy's World pertencem aos seus respectivos criadores no Roblox</p>
+    </footer>
+
+    <div class="theme-switch" id="themeSwitch">🌓</div>
+
+    <script>
+        // Navegação suave apenas para links internos
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Alternar tema claro/escuro
+        const themeSwitch = document.getElementById('themeSwitch');
+        let darkMode = true; // Começa no modo escuro
+
+        themeSwitch.addEventListener('click', () => {
+            darkMode = !darkMode;
+
+            if (darkMode) {
+                document.documentElement.style.setProperty('--secondary', '#1f1f1f');
+                document.documentElement.style.setProperty('--text', '#f8f8f8');
+                themeSwitch.textContent = '🌓';
+            } else {
+                document.documentElement.style.setProperty('--secondary', '#f8f8f8');
+                document.documentElement.style.setProperty('--text', '#1f1f1f');
+                themeSwitch.textContent = '🌒';
+            }
+        });
+
+        // Animação de aparecimento ao rolar
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.section, .youtube-section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+
+        // Easter egg - clicar na imagem de Vee 5 vezes
+        let veeClickCount = 0;
+        const veeImage = document.querySelector('.hero-image img');
+
+        veeImage.addEventListener('click', () => {
+            veeClickCount++;
+
+            if (veeClickCount === 5) {
+                alert("Você encontrou Vee! Ela tem uma mensagem para você: 'Os segredos estão nas sombras...'");
+                veeImage.style.boxShadow = '0 0 20px var(--primary)';
+                veeClickCount = 0;
+            }
+        });
+
+        // Simulação de clique no botão de play do YouTube
+        document.querySelector('.play-button').addEventListener('click', function () {
+            alert('Você será redirecionado para o vídeo no YouTube em um site real.');
+            window.open('https://www.youtube.com/watch?v=23UNVW69OIU', '_blank');
+        });
+    </script>
+</body>
+
+</html>

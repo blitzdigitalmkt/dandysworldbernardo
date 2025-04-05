@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dandy - Dandy's World</title>
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #1f1f1f;
+            --accent: #e74c3c;
+            --text: #f8f8f8;
+            --youtube: #ff0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 4px solid #27ae60;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            background-color: #27ae60;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid var(--primary);
+            border-radius: 8px;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-box {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background-color: var(--primary);
+            color: var(--secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-item {
+            border: 3px solid var(--primary);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: var(--secondary);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--text);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .button:hover {
+            background-color: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* YouTube Section */
+        .youtube-section {
+            background: linear-gradient(135deg, rgba(32, 32, 32, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-top: 5px solid var(--youtube);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1200/200') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .youtube-title {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .youtube-description {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .youtube-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .youtube-video {
+            flex: 1;
+            min-width: 300px;
+            max-width: 560px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio */
+        }
+
+        .youtube-video img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .youtube-video:hover img {
+            transform: scale(1.05);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background-color: var(--youtube);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .play-button::after {
+            content: '';
+            display: block;
+            border-style: solid;
+            border-width: 15px 0 15px 25px;
+            border-color: transparent transparent transparent white;
+            margin-left: 5px;
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .youtube-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .channel-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .channel-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--youtube);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+        .stat-icon {
+            font-size: 1.2rem;
+            color: var(--youtube);
+        }
+
+        .youtube-button {
+            display: inline-block;
+            background-color: var(--youtube);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .youtube-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background-color: #e50000;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Modo escuro/claro toggle */
+        .theme-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--text);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            font-size: 1.5rem;
+        }
+
+        /* Animações */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .youtube-title {
+                font-size: 2rem;
+            }
+
+            .youtube-description {
+                font-size: 1rem;
+            }
+
+            .youtube-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .youtube-video {
+                max-width: 100%;
+            }
+
+            .youtube-info {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .channel-name {
+                justify-content: center;
+            }
+
+            .stat {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .youtube-title {
+                font-size: 1.8rem;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .youtube-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Dandy</h1>
+        <p>O protagonista carismático que dá nome ao jogo.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/index.html">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#historia">História</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#dicas">Dicas</a></li>
+            <li><a href="#youtube">Meu Canal</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Dandy, o protagonista carismático</h2>
+                <p>Dandy é o personagem principal que dá nome ao jogo Dandy's World no Roblox. Com seu carisma inigualável e habilidades especiais, ele se tornou um ícone querido entre os jogadores de todas as idades.</p>
+                <p class="info-box">Dandy pode ser encontrado explorando diversas áreas do mapa, sempre identificável por seu visual característico e personalidade marcante que o destaca dos outros personagens.</p>
+                <a href="#historia" class="button">Descobrir mais</a>
+            </div>
+            <div class="hero-image">
+                <img src="./images/dandys.webp" alt="Dandy de Dandy's World" class="float" width="400px" height="400px">
+            </div>
+        </section>
+
+        <section id="sobre" class="section">
+            <h2>Sobre Dandy</h2>
+            <p>Dandy é o herói principal de Dandy's World, reconhecido por sua determinação e espírito aventureiro. Ele tem uma missão importante no jogo: restaurar a paz e harmonia nas diversas regiões do mundo, enfrentando desafios e resolvendo mistérios por onde passa.</p>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Força</h3>
+                    <div class="stat-value">90</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Carisma</h3>
+                    <div class="stat-value">95</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Agilidade</h3>
+                    <div class="stat-value">88</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="historia" class="section">
+            <h2>História de Dandy</h2>
+            <p>A história de Dandy começa quando ele descobre que seu mundo está sendo corrompido por forças misteriosas. Originalmente um jovem comum de uma pequena vila, Dandy embarca em uma jornada épica após receber poderes especiais de um antigo guardião.</p>
+            <p>Ao longo de sua jornada, Dandy conhece aliados importantes e descobre segredos sobre seu próprio passado que estão intrinsecamente ligados ao destino do mundo inteiro. Sua personalidade otimista e determinada o ajuda a superar os obstáculos mais difíceis.</p>
+            <p class="info-box">Dandy carrega consigo um medalhão místico que é a fonte principal de seus poderes e que também serve como uma chave para áreas secretas espalhadas pelo mapa.</p>
+        </section>
+
+        <section id="habilidades" class="section">
+            <h2>Habilidades de Dandy</h2>
+            <p>Dandy possui um conjunto único de habilidades que o tornam o herói perfeito para salvar seu mundo:</p>
+            <ul style="margin-left: 2rem;">
+                <li><strong>Super salto:</strong> Dandy pode pular a alturas impressionantes, permitindo alcançar plataformas elevadas.</li>
+                <li><strong>Força aprimorada:</strong> Consegue mover objetos pesados e derrotar inimigos com golpes poderosos.</li>
+                <li><strong>Encantamento:</strong> Pode interagir com certos objetos mágicos para ativar mecanismos ou revelar segredos.</li>
+                <li><strong>Velocidade aumentada:</strong> Em momentos críticos, pode correr em velocidade extraordinária.</li>
+                <li><strong>Amizade animal:</strong> Tem a capacidade de se comunicar e recrutar animais do mundo para ajudá-lo em sua missão.</li>
+            </ul>
+        </section>
+
+        <section id="galeria" class="section">
+            <h2>Galeria</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="./images/dandys.webp" alt="Dandy em uma aventura">
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/dandys.webp" alt="Dandy usando seus poderes">
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/dandys.webp" alt="Dandy com seus aliados">
+                </div>
+                <div class="gallery-item">
+                    <img src="./images/dandys.webp" alt="Dandy em uma área secreta">
+                </div>
+            </div>
+        </section>
+
+        <section id="dicas" class="section">
+            <h2>Dicas para Jogar com Dandy</h2>
+            <p>Para aproveitar ao máximo a experiência com Dandy em Dandy's World, siga estas dicas:</p>
+            <ol style="margin-left: 2rem;">
+                <li>Explore todos os cantos do mapa - Dandy pode encontrar itens secretos em locais inesperados.</li>
+                <li>Aprimore as habilidades de Dandy coletando cristais mágicos espalhados pelo mundo.</li>
+                <li>Interaja com outros personagens - muitos têm missões secundárias que recompensam Dandy com itens raros.</li>
+                <li>Use o medalhão de Dandy perto de estruturas antigas para revelar passagens secretas.</li>
+                <li>Domine o timing do super salto para alcançar plataformas que parecem impossíveis de serem alcançadas.</li>
+            </ol>
+            <p class="info-box">Lembre-se que as habilidades de Dandy evoluem conforme você progride no jogo, então retorne a áreas anteriores com novas habilidades para descobrir segredos previamente inacessíveis.</p>
+        </section>
+
+        <!-- Seção do YouTube -->
+        <section id="youtube" class="youtube-section">
+            <h2 class="youtube-title">Confira Meu Canal no YouTube</h2>
+            <p class="youtube-description">Dicas exclusivas, gameplays e segredos de Dandy's World. Acompanhe meus
+                vídeos para descobrir mais sobre Dandy e outros personagens!</p>
+
+            <div class="youtube-content">
+                <div class="youtube-video">
+                    <img src="./images/capavideo.avif" alt="Destaque do Canal">
+                    <div class="play-button"></div>
+                </div>
+
+                <div class="youtube-info">
+                    <div class="channel-name">
+                        <img src="./images/logocanal.jpg" alt="Logo do Canal" class="channel-logo">
+                        <span>BernardoDandysworld</span>
+                    </div>
+
+                    <div class="stat">
+                        <span class="stat-icon">👁️</span>
+                        <span>Vídeos sobre Dandy's World</span>
+                    </div>
+
+                    <div class="stat">
+                        <span class="stat-icon">🎮</span>
+                        <span>Gameplays exclusivas</span>
+                    </div>
+
+                    <div class="stat">
+                        <span class="stat-icon">🔎</span>
+                        <span>Segredos e easter eggs</span>
+                    </div>
+
+                    <a href="https://www.youtube.com/@BernardoDandysworld" target="_blank"
+                        class="youtube-button pulse">Inscreva-se Agora</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Portal Dandy's World criado por Bernardo - 2025</p>
+        <p>Dandy e todos os elementos de Dandy's World pertencem aos seus respectivos criadores no Roblox</p>
+    </footer>
+
+    <div class="theme-switch" id="themeSwitch">🌓</div>
+
+    <script>
+        // Navegação suave apenas para links internos
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Alternar tema claro/escuro
+        const themeSwitch = document.getElementById('themeSwitch');
+        let darkMode = true; // Começa no modo escuro
+
+        themeSwitch.addEventListener('click', () => {
+            darkMode = !darkMode;
+
+            if (darkMode) {
+                document.documentElement.style.setProperty('--secondary', '#1f1f1f');
+                document.documentElement.style.setProperty('--text', '#f8f8f8');
+                themeSwitch.textContent = '🌓';
+            } else {
+                document.documentElement.style.setProperty('--secondary', '#f8f8f8');
+                document.documentElement.style.setProperty('--text', '#1f1f1f');
+                themeSwitch.textContent = '🌒';
+            }
+        });
+
+        // Animação de aparecimento ao rolar
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.section, .youtube-section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(section);
+        });
+
+        // Easter egg - clicar na imagem de Dandy 5 vezes
+        let dandyClickCount = 0;
+        const dandyImage = document.querySelector('.hero-image img');
+
+        dandyImage.addEventListener('click', () => {
+            dandyClickCount++;
+
+            if (dandyClickCount === 5) {
+                alert("Você descobriu um poder secreto de Dandy! 'A verdadeira força está na amizade e na coragem!'");
+                dandyImage.style.boxShadow = '0 0 20px var(--primary)';
+                dandyClickCount = 0;
+            }
+        });
+
+        // Simulação de clique no botão de play do YouTube
+        document.querySelector('.play-button').addEventListener('click', function () {
+            alert('Você será redirecionado para o vídeo no YouTube em um site real.');
+            window.open('https://www.youtube.com/watch?v=23UNVW69OIU', '_blank');
+        });
+    </script>
+</body>
+
+</html>
